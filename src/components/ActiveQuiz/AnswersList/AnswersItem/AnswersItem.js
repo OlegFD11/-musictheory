@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./AnswersItem.css";
+import "./AnswersItem.scss";
 
 const AnswersItem = (props) => {
   return (

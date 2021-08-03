@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import classes from "./Auth.css";
+import "./Auth.scss";
 import Button from "../../components/UI/Button/Button";
 import Input from "../../components/UI/Input/Input";
 

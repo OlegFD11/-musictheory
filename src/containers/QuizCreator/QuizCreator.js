@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import classes from "./QuizCreator.css";
+import "./QuizCreator.scss";
 import Button from "../../components/UI/Button/Button";
 import Input from "../../components/UI/Input/Input";
 import Select from "../../components/UI/Select/Select";
@@ -55,8 +55,7 @@ export default class QuizCreator extends Component {
     const quiz = this.state.quiz.concat();
     const index = quiz.length + 1;
 
-    const { question, option1, option2, option3, option4 } =
-      this.state.formControls;
+    const { option1, option2, option3, option4 } = this.state.formControls;
 
     const questionItem = {
       question: this.state.formControls.question.value,

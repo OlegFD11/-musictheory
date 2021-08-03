@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./FinishedQuiz.css";
+import "./FinishedQuiz.scss";
 import Button from "../UI/Button/Button";
 import { Link } from "react-router-dom";
 

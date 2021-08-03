@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import classes from "./Quiz.css";
+import "./Quiz.scss";
 import ActiveQuiz from "../../components/ActiveQuiz/ActiveQuiz";
 import FinishedQuiz from "../../components/FinishedQuiz/FinishedQuiz";
 
@@ -105,7 +105,6 @@ class Quiz extends Component {
             <ActiveQuiz
               answers={this.state.quiz[this.state.activeQuestion].answers}
               question={this.state.quiz[this.state.activeQuestion].question}
-              onAnswerClick={this.onAnswerClickHandler}
               onAnswerClick={this.onAnswerClickHandler}
               quizeLength={this.state.quiz.length}
               answerNumber={this.state.activeQuestion + 1}

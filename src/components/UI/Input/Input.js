@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import classes from "./Input.css";
+import React from "react";
+import "./Input.scss";
 
 function isInvalid({ valid, touched, shouldValidate }) {
   return !valid && shouldValidate && touched;
