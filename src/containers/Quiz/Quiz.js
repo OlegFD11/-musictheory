@@ -35,17 +35,20 @@ class Quiz extends Component {
     ],
   };
 
+  isQuizFinish() {
+    return this.state.activeQuestion + 1 === this.state.quiz.length;
+  }
+
   onAnswerClickHandler = (answerId) => {
-    console.log();
+    const question = this.state.quiz[this.state.activeQuestion];
+    const results = this.state.results;
+
     if (this.state.answerState) {
       const key = Object.keys(this.state.answerState)[0];
       if (this.state.answerState[key] === "success") {
         return;
       }
     }
-
-    const question = this.state.quiz[this.state.activeQuestion];
-    const results = this.state.results;
 
     if (question.rightAnswerId === answerId) {
       if (!results[question.id]) {
@@ -64,7 +67,6 @@ class Quiz extends Component {
             answerState: null,
           });
         }
-
         window.clearTimeout(timeout);
       }, 1000);
     } else {
@@ -72,14 +74,6 @@ class Quiz extends Component {
       this.setState({ answerState: { [answerId]: "error" }, results: results });
     }
   };
-
-  isQuizFinish() {
-    return this.state.activeQuestion + 1 === this.state.quiz.length;
-  }
-
-  // componentDidMount() {
-  //   console.log("Quiz Id:", this.props.match.params.id);
-  // }
 
   retryHandler = () => {
     this.setState({
