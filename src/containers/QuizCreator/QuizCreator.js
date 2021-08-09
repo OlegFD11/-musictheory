@@ -9,6 +9,7 @@ import {
   validateForm,
 } from "../../form/formFramework";
 import Auxiliary from "../../hoc/Auxiliary/Auxiliary";
+import axios from "../../axios/axios-quiz";
 
 function createOptionControl(number) {
   return createControl(
@@ -55,20 +56,23 @@ export default class QuizCreator extends Component {
     const quiz = this.state.quiz.concat();
     const index = quiz.length + 1;
 
-    const { option1, option2, option3, option4 } = this.state.formControls;
+    const { question, option1, option2, option3, option4 } =
+      this.state.formControls;
 
     const questionItem = {
-      question: this.state.formControls.question.value,
+      question: question.value,
       id: index,
       rightAnswerId: this.state.rightAnswerId,
-      answer: [
+      answers: [
         { text: option1.value, id: option1.id },
         { text: option2.value, id: option2.id },
         { text: option3.value, id: option3.id },
         { text: option4.value, id: option4.id },
       ],
     };
+
     quiz.push(questionItem);
+
     this.setState({
       quiz,
       isFormValid: false,
@@ -77,10 +81,21 @@ export default class QuizCreator extends Component {
     });
   };
 
-  createQuizHandler = (event) => {
+  createQuizHandler = async (event) => {
     event.preventDefault();
-    console.log(this.state.quiz);
-    // todo: server
+
+    try {
+      await axios.post("/quizes.json", this.state.quiz);
+
+      this.setState({
+        quiz: [],
+        isFormValid: false,
+        rightAnswerId: 1,
+        formControls: createFormControls(),
+      });
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   changeHandler = (value, controlName) => {

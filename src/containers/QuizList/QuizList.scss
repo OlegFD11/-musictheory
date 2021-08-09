@@ -1,12 +1,13 @@
 .QuizList {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   padding-top: 100px;
   flex-grow: 1;
   width: 100%;
-  background: linear-gradient(90deg, #fd8355 0%, #f0576c 37%, #f79cbd 100%);
+  // background: linear-gradient(90deg, #fd8355 0%, #f0576c 37%, #f79cbd 100%);
+  background-image: url("../../music.jpg");
 }
 
 .QuizList h1 {
