@@ -33,3 +33,8 @@ export function validateForm(formControls) {
 
   return isFormValid;
 }
+//----------------------------------------------------------------
+
+export function submitHandler(event) {
+  event.preventDefault();
+}

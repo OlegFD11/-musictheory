@@ -4,22 +4,63 @@ import Button from "../../components/UI/Button/Button";
 import Input from "../../components/UI/Input/Input";
 import Select from "../../components/UI/Select/Select";
 import {
+  createControl,
   validate,
   validateForm,
-  submitHandler,
 } from "../../form/formFramework";
-import { createFormControls } from "./util/index";
 import Auxiliary from "../../hoc/Auxiliary/Auxiliary";
 import axios from "../../axios/axios-quiz";
+
+function createOptionControl(number) {
+  return createControl(
+    {
+      label: `Вариант ${number}`,
+      errorMessage: "Значение не может быть пустым",
+      id: number,
+    },
+    { required: true }
+  );
+}
+
+// function createNameQuiz() {
+//   //
+//   return createControl(
+//     {
+//       label: `Введите название теста`,
+//       errorMessage: "Значение не может быть пустым",
+//     },
+//     { required: true }
+//   );
+// }
+
+function createFormControls() {
+  return {
+    question: createControl(
+      {
+        label: "Введите вопрос",
+        errorMessage: "Вопрос не может быть пустым",
+      },
+      { required: true }
+    ),
+    option1: createOptionControl(1),
+    option2: createOptionControl(2),
+    option3: createOptionControl(3),
+    option4: createOptionControl(4),
+  };
+}
 
 export default class QuizCreator extends Component {
   state = {
     quiz: [],
     isFormValid: false,
     rightAnswerId: 1,
+    formName: createNameQuiz(),
     formControls: createFormControls(),
   };
 
+  sibmitHandler = (event) => {
+    event.preventDefault();
+  };
   // ------------------------- создаем функцию создания вопроса
 
   addQuestionHandler = (event) => {
@@ -61,6 +102,7 @@ export default class QuizCreator extends Component {
       this.setState({
         quiz: [],
         isFormValid: false,
+        formName: createNameQuiz(),
         rightAnswerId: 1,
         formControls: createFormControls(),
       });
@@ -134,7 +176,7 @@ export default class QuizCreator extends Component {
         <div>
           <h1>Создание теста</h1>
 
-          <form onSubmit={submitHandler}>
+          <form onSubmit={this.submitHandler}>
             <Input label={"Введите название теста"} />
 
             {this.renderControls()}
