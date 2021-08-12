@@ -23,13 +23,14 @@ export default class QuizList extends Component {
   async componentDidMount() {
     try {
       const response = await axios.get("/quizes.json");
-
+      console.log(response);
       const quizes = [];
 
       Object.keys(response.data).forEach((key, index) => {
+        console.log(response.data);
         quizes.push({
           id: key,
-          name: `Тест №${index + 1}`,
+          name: key,
         });
       });
 

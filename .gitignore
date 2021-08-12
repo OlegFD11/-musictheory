@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/src/archiv
 /.pnp
 .pnp.js
 

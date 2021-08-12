@@ -1,6 +1,6 @@
 import { createControl } from "../../../form/formFramework";
 
-// создание инпутов
+// создание вопроса
 
 function createOptionControl(number) {
   return createControl(
@@ -31,14 +31,11 @@ export function createFormControls() {
 
 // Создаем Заголовок теста
 
-export function createFormControlName() {
-  return {
-    quizName: createControl(
-      {
-        label: "Введите название теста",
-        errorMessage: "Название теста не может быть пустым",
-      },
-      { required: true }
-    ),
-  };
+export function createFormControlsQuiz() {
+  return createControl(
+    {
+      errorMessage: "Значение не может быть пустым",
+    },
+    { required: true }
+  );
 }

@@ -15,6 +15,7 @@ import axios from "../../axios/axios-quiz";
 export default class QuizCreator extends Component {
   state = {
     quiz: [],
+    quizName: "",
     isFormValid: false,
     rightAnswerId: 1,
     formControls: createFormControls(),
@@ -24,7 +25,8 @@ export default class QuizCreator extends Component {
 
   addQuestionHandler = (event) => {
     event.preventDefault();
-    const quiz = this.state.quiz.concat();
+
+    const quiz = this.state.quiz;
     const index = quiz.length + 1;
     const { question, option1, option2, option3, option4 } =
       this.state.formControls;
@@ -51,15 +53,23 @@ export default class QuizCreator extends Component {
     });
   };
 
-  // -----------------------------------------------------------
   createQuizHandler = async (event) => {
-    console.log(this.state.quiz);
     event.preventDefault();
+
+    console.log(this.state.quiz);
+
+    const data = {
+      quizName: this.state.quizName,
+      quiz: this.state.quiz,
+    };
+
     try {
-      await axios.post("/quizes.json", this.state.quiz);
+      await axios.post("/quizes.json", data);
+      console.log(this.state.quiz);
 
       this.setState({
-        quiz: [],
+        quizTest: [],
+        quizName: "",
         isFormValid: false,
         rightAnswerId: 1,
         formControls: createFormControls(),
@@ -114,6 +124,12 @@ export default class QuizCreator extends Component {
     });
   };
 
+  handleInputName = (event) => {
+    this.setState({
+      quizName: event.target.value,
+    });
+  };
+
   render() {
     const select = (
       <Select
@@ -135,7 +151,10 @@ export default class QuizCreator extends Component {
           <h1>Создание теста</h1>
 
           <form onSubmit={submitHandler}>
-            <Input label={"Введите название теста"} />
+            <Input
+              label={"Введите название теста"}
+              onChange={this.handleInputName}
+            />
 
             {this.renderControls()}
 
@@ -152,7 +171,7 @@ export default class QuizCreator extends Component {
             <Button
               type="success"
               onClick={this.createQuizHandler}
-              disabled={this.state.quiz.length === 0}
+              disabled={this.state.quiz === 0}
             >
               Создать тест
             </Button>

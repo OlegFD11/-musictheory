@@ -76,7 +76,9 @@ class Quiz extends Component {
       const response = await axios.get(
         `/quizes/${this.props.match.params.id}.json`
       );
-      const quiz = response.data;
+      const quiz = response.data.quiz;
+
+      console.log(quiz);
 
       this.setState({
         quiz,
